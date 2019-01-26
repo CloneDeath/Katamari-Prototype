@@ -20,9 +20,7 @@ func look_at_target():
 
 func move_towards_target(delta):
 	var idealPosition = get_ideal_position();
-	var dp = min(speed * delta, abs(self.translation.distance_to(idealPosition)));
-	var dv = (idealPosition - self.translation).normalized() * dp;
-	self.translate(dv);
+	self.translation = idealPosition;
 
 func get_ideal_position():
 	var targetNode : Spatial = get_target_node();
