@@ -24,6 +24,7 @@ noise = SubResource( 3 )
 
 albedo_color = Color( 0.521569, 0.929412, 0.509804, 1 )
 albedo_texture = SubResource( 4 )
+uv1_triplanar = true
 
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
