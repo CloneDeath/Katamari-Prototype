@@ -4,6 +4,7 @@
 
 top_radius = 0.1
 bottom_radius = 0.1
+radial_segments = 7
 
 [sub_resource type="ConvexPolygonShape" id=2]
 
