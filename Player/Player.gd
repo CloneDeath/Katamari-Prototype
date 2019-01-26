@@ -1,6 +1,9 @@
 extends Spatial
 var speed = 5;
 
+func _process(_delta):
+	$Camera.distance_scale = pow($Ball.mass, 1.0/3.0);
+
 func _physics_process(_delta):
 	execute_movement();
 	for body in $Ball.get_colliding_bodies():
@@ -22,8 +25,8 @@ func execute_movement():
 	if (Input.is_action_pressed("move_right")):
 		torque -= basis.z;
 		motion += basis.x;
-	$Ball.add_torque(torque * speed);
-	$Ball.add_central_force(motion * speed);
+	$Ball.add_torque(torque * speed * $Ball.mass);
+	$Ball.add_central_force(motion * speed * $Ball.mass);
 
 func execute_collision(body: Node):
 	if (body.is_in_group("collectable")):

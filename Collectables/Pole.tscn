@@ -13,6 +13,7 @@ points = PoolVector3Array( 0, 1, 0.1, 0.00980171, 1, 0.0995185, 0.019509, 1, 0.0
 "collectable",
 ]]
 mode = 1
+mass = 0.1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
