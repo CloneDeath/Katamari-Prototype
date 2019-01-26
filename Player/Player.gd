@@ -2,6 +2,11 @@ extends Spatial
 var speed = 5;
 
 func _physics_process(_delta):
+	execute_movement();
+	for body in $Ball.get_colliding_bodies():
+		execute_collision(body);
+
+func execute_movement():
 	var torque = Vector3(0, 0, 0);
 	var motion = Vector3(0, 0, 0);
 	var basis = $Camera.transform.basis;
@@ -20,7 +25,7 @@ func _physics_process(_delta):
 	$Ball.add_torque(torque * speed);
 	$Ball.add_central_force(motion * speed);
 
-func _on_Ball_body_entered(body: Node):
+func execute_collision(body: Node):
 	if (body.is_in_group("collectable")):
 		var rigid = body as RigidBody
 		if (rigid.mass <= $Ball.mass * 0.25):
@@ -28,7 +33,7 @@ func _on_Ball_body_entered(body: Node):
 		else:
 			var impulse = ($Ball.translation - rigid.translation).normalized();
 			impulse.y += 0.1;
-			$Ball.apply_central_impulse(impulse * $Ball.mass * 10);
+			$Ball.apply_central_impulse(impulse * $Ball.mass);
 
 func absorb_object(other: RigidBody):
 	for child in other.get_children():
@@ -41,3 +46,6 @@ func reparent_onto(node: Spatial, new_parent: Spatial):
 	node.get_parent().remove_child(node);
 	new_parent.add_child(node);
 	node.global_transform = previous_global;
+
+func _on_Ball_body_entered(body):
+	execute_collision(body);

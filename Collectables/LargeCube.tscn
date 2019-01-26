@@ -1,8 +1,5 @@
 [gd_scene load_steps=6 format=2]
 
-[sub_resource type="BoxShape" id=1]
-
-
 [sub_resource type="OpenSimplexNoise" id=2]
 
 
@@ -22,14 +19,19 @@ albedo_texture = SubResource( 3 )
 
 material = SubResource( 4 )
 
+[sub_resource type="ConvexPolygonShape" id=6]
+
+points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1 )
+
 [node name="LargeCube" type="RigidBody" groups=[
 "collectable",
 ]]
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+mode = 1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 5 )
 material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 6 )
 

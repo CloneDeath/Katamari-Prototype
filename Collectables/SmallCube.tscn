@@ -27,6 +27,7 @@ size = Vector3( 0.4, 0.4, 0.4 )
 [node name="SmallCube" type="RigidBody" groups=[
 "collectable",
 ]]
+mode = 1
 mass = 0.06
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
