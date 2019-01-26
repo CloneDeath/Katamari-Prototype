@@ -1,4 +1,5 @@
 extends Spatial
+var speed = 5;
 
 func _physics_process(_delta):
 	var motion = Vector3(0, 0, 0);
@@ -11,4 +12,4 @@ func _physics_process(_delta):
 		motion -= basis.x;
 	if (Input.is_action_pressed("move_right")):
 		motion += basis.x;
-	$Ball.add_central_force(motion);
+	$Ball.add_central_force(motion * speed);
