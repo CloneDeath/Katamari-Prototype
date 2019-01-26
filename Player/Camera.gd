@@ -1,7 +1,6 @@
 extends Camera
 
 export(NodePath) var target;
-export(float) var speed = 10;
 var distance: Vector2 = Vector2(0, 0);
 var initial_rotation = 0;
 
@@ -9,8 +8,8 @@ func _ready():
 	self.distance = distance_to_target()
 	self.initial_rotation = self.rotation.x;
 
-func _physics_process(delta):
-	move_towards_target(delta);
+func _physics_process(_delta):
+	move_towards_target();
 	look_at_target();
 
 func look_at_target():
@@ -18,7 +17,7 @@ func look_at_target():
 	self.look_at(target_node.translation, Vector3(0, 1, 0));
 	self.rotation.x = self.initial_rotation;
 
-func move_towards_target(delta):
+func move_towards_target():
 	var idealPosition = get_ideal_position();
 	self.translation = idealPosition;
 
