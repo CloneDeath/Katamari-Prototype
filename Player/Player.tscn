@@ -36,6 +36,8 @@ script = ExtResource( 2 )
 target = NodePath("../Ball")
 
 [node name="Ball" type="RigidBody" parent="."]
+contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Ball"]
 shape = SubResource( 1 )
@@ -44,3 +46,4 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 5 )
 
+[connection signal="body_entered" from="Ball" to="." method="_on_Ball_body_entered"]
