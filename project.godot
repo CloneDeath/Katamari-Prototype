@@ -19,10 +19,6 @@ config/name="Katamari-Prototype"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
-[display]
-
-window/size/borderless=true
-
 [input]
 
 move_forward={
