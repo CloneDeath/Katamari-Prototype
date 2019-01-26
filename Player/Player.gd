@@ -22,11 +22,19 @@ func _physics_process(_delta):
 
 func _on_Ball_body_entered(body: Node):
 	if (body.is_in_group("collectable")):
-		var shape = body.get_node("CollisionShape") as CollisionShape;
-		var mesh = body.get_node("MeshInstance") as MeshInstance;
-		reparent_onto(shape, $Ball);
-		reparent_onto(mesh, $Ball);
-		body.queue_free();
+		var rigid = body as RigidBody
+		if (rigid.mass <= $Ball.mass * 0.25):
+			absorb_object(rigid);
+		else:
+			var impulse = ($Ball.translation - rigid.translation).normalized();
+			impulse.y += 0.1;
+			$Ball.apply_central_impulse(impulse * $Ball.mass * 10);
+
+func absorb_object(other: RigidBody):
+	for child in other.get_children():
+		reparent_onto(child, $Ball);
+	$Ball.mass += other.mass;
+	other.queue_free();
 
 func reparent_onto(node: Spatial, new_parent: Spatial):
 	var previous_global = node.global_transform;
