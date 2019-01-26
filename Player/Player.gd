@@ -2,16 +2,22 @@ extends Spatial
 var speed = 5;
 
 func _physics_process(_delta):
+	var torque = Vector3(0, 0, 0);
 	var motion = Vector3(0, 0, 0);
 	var basis = $Camera.transform.basis;
 	if (Input.is_action_pressed("move_forward")):
+		torque -= basis.x;
 		motion -= basis.z;
 	if (Input.is_action_pressed("move_backward")):
+		torque += basis.x;
 		motion += basis.z;
 	if (Input.is_action_pressed("move_left")):
+		torque += basis.z;
 		motion -= basis.x;
 	if (Input.is_action_pressed("move_right")):
+		torque -= basis.z;
 		motion += basis.x;
+	$Ball.add_torque(torque * speed);
 	$Ball.add_central_force(motion * speed);
 
 func _on_Ball_body_entered(body: Node):
